@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var JSONAPIComponent = require('../');
 var app, Post;
 
-describe('loopback json api remote methods', function () {
+describe.skip('loopback json api remote methods', function () {
   beforeEach(function () {
     app = loopback();
     app.set('legacyExplorer', false);
@@ -33,7 +33,7 @@ describe('loopback json api remote methods', function () {
     it('POST /posts/greet should return remote method message', function (done) {
       request(app).post('/posts/greet')
         .send({'msg': 'John'})
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .expect(200)
         .end(function (err, res) {
           expect(err).to.equal(null);
