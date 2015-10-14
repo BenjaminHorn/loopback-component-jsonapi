@@ -54,8 +54,9 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
-        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        //.expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .expect('Location', /^http:\/\/127\.0\.0\.1.*\/posts\/1/)
         .end(done);
     });
@@ -91,7 +92,8 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
+        //.set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.deep.property('data.links.self');
@@ -113,7 +115,8 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
+        //.set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.all.keys('data');
@@ -139,7 +142,8 @@ describe('loopback json api component create method', function () {
           }
         })
         .expect(422)
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        //.set('Content-Type', 'application/json')
         .end(done);
     });
 
@@ -149,7 +153,8 @@ describe('loopback json api component create method', function () {
       request(app).post('/posts')
         .send({ data: { type: 'posts' } })
         .expect(422)
-        .set('Content-Type', 'application/json')
+        //.set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
         .end(done);
     });
 
@@ -159,7 +164,8 @@ describe('loopback json api component create method', function () {
 
       request(app).post('/posts')
         .send({ data: { type: 'posts' } })
-        .set('Content-Type', 'application/json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .set('Accept', 'application/vnd.api+json')
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.keys('errors');
