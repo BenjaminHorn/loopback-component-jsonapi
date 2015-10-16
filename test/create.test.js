@@ -22,25 +22,20 @@ describe('loopback json api component create method', function () {
 
   describe('headers', function () {
     it('POST /models should have the JSON API Content-Type header set on response', function (done) {
-      //TODO: superagent/supertest breaks when trying to use JSON API Content-Type header
-      //waiting on a fix
-      //see https://github.com/visionmedia/superagent/issues/753
-      //using Content-Type: application/json in the mean time.
-      //Have tested correct header using curl and all is well
-      // request(app).post('/posts')
-      //   .send({
-      //     data: {
-      //       type: 'posts',
-      //       attributes: {
-      //         title: 'my post',
-      //         content: 'my post content'
-      //       }
-      //     }
-      //   })
-      //   .set('Content-Type', 'application/vnd.api+json')
-      //   .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
-      //   .end(done);
-      done();
+      request(app).post('/posts')
+        .send({
+          data: {
+            type: 'posts',
+            attributes: {
+              title: 'my post',
+              content: 'my post content'
+            }
+          }
+        })
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
+        .end(done);
     });
 
     it('POST /models should have the Location header set on response', function (done) {
@@ -54,9 +49,10 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
-        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
         .expect('Location', /^http:\/\/127\.0\.0\.1.*\/posts\/1/)
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(done);
     });
   });
@@ -73,7 +69,8 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
         .expect(201)
         .end(done);
     });
@@ -91,7 +88,9 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.deep.property('data.links.self');
@@ -113,7 +112,9 @@ describe('loopback json api component create method', function () {
             }
           }
         })
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.all.keys('data');
@@ -139,7 +140,9 @@ describe('loopback json api component create method', function () {
           }
         })
         .expect(422)
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(done);
     });
 
@@ -149,7 +152,9 @@ describe('loopback json api component create method', function () {
       request(app).post('/posts')
         .send({ data: { type: 'posts' } })
         .expect(422)
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(done);
     });
 
@@ -159,7 +164,9 @@ describe('loopback json api component create method', function () {
 
       request(app).post('/posts')
         .send({ data: { type: 'posts' } })
-        .set('Content-Type', 'application/json')
+        .set('Accept', 'application/vnd.api+json')
+        .set('Content-Type', 'application/vnd.api+json')
+        .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
         .end(function (err, res) {
           expect(err).to.equal(null);
           expect(res.body).to.have.keys('errors');

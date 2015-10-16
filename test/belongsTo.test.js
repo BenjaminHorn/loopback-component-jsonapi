@@ -43,8 +43,12 @@ describe('loopback json api hasOne relationships', function () {
 
     describe('GET /comments/1/post', function () {
       it('should return status code 200 OK', function (done) {
-        request(app).get('/comments/1/post')
+        request(app)
+          .set('Accept', 'application/vnd.api+json')
+          .set('Content-Type', 'application/vnd.api+json')
+          .get('/comments/1/post')
           .expect(200)
+          .expect('Content-Type', 'application/vnd.api+json; charset=utf-8')
           .end(done);
       });
 
@@ -64,12 +68,16 @@ describe('loopback json api hasOne relationships', function () {
     describe('GET /comments/1/relationships/post', function () {
       it('should return status code 200 OK', function (done) {
         request(app).get('/comments/1/relationships/post')
+          .set('Accept', 'application/vnd.api+json')
+          .set('Content-Type', 'application/vnd.api+json')
           .expect(200)
           .end(done);
       });
 
       it('should return `null` keyed by `data`', function (done) {
         request(app).get('/comments/1/relationships/post')
+          .set('Accept', 'application/vnd.api+json')
+          .set('Content-Type', 'application/vnd.api+json')
           .end(function (err, res) {
             expect(err).to.equal(null);
             expect(res.body).to.be.an('object');
@@ -106,6 +114,8 @@ describe('loopback json api hasOne relationships', function () {
 
       it('should display a single resource object keyed by `data`', function (done) {
         request(app).get('/comments/1/post')
+          .set('Accept', 'application/vnd.api+json')
+          .set('Content-Type', 'application/vnd.api+json')
           .end(function (err, res) {
             expect(err).to.equal(null);
             expect(res.body).to.be.an('object');
@@ -126,12 +136,16 @@ describe('loopback json api hasOne relationships', function () {
     describe('GET /comments/1/relationships/post', function () {
       it('should return status code 200 OK', function (done) {
         request(app).get('/comments/1/relationships/post')
+          .set('Accept', 'application/vnd.api+json')
+          .set('Content-Type', 'application/vnd.api+json')
           .expect(200)
           .end(done);
       });
 
       it('should display a single resource object keyed by `data`', function (done) {
         request(app).get('/comments/1/relationships/post')
+          .set('Accept', 'application/vnd.api+json')
+          .set('Content-Type', 'application/vnd.api+json')
           .end(function (err, res) {
             expect(err).to.equal(null);
             expect(res.body).to.be.an('object');
