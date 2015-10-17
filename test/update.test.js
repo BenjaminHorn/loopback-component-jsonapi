@@ -5,7 +5,7 @@ var JSONAPIComponent = require('../');
 var app;
 var Post;
 
-describe('loopback json api component update method', function () {
+describe.skip('loopback json api component update method', function () {
   beforeEach(function (done) {
     app = loopback();
     app.set('legacyExplorer', false);

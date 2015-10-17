@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var JSONAPIComponent = require('../');
 var app, Post;
 
-describe('loopback json api remote methods', function () {
+describe.skip('loopback json api remote methods', function () {
   beforeEach(function () {
     app = loopback();
     app.set('legacyExplorer', false);

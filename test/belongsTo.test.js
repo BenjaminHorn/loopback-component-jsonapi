@@ -7,7 +7,7 @@ var Post;
 var Comment;
 var ds;
 
-describe('loopback json api hasOne relationships', function () {
+describe.skip('loopback json api hasOne relationships', function () {
   beforeEach(function () {
     app = loopback();
     app.set('legacyExplorer', false);
